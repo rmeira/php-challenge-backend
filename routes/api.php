@@ -1,19 +1,28 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+Route::redirect('/', '/swagger', 301);
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::namespace('v1')->prefix('v1')->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('login', 'LoginController@login')->name('auth.login');
+        Route::post('logout', 'LoginController@logout')->name('auth.logout');
+    });
+
+    Route::middleware('auth:api')->group(function () {
+        Route::get('profile', 'ProfileController@index')->name('profile.index');
+        Route::put('profile', 'ProfileController@update')->name('profile.update');
+        Route::apiResource('profile-notifications', 'ProfileNotificationController');
+        Route::apiResource('profile-permissions', 'ProfilePermissionController', ['only' => ['index']]);
+        Route::apiResource('profile-roles', 'ProfileRoleController', ['only' => ['index']]);
+        Route::apiResource('profile-activities', 'ProfileActivityController', ['only' => ['index']]);
+        Route::apiResource('users', 'UserController');
+        Route::apiResource('storage', 'StorageController', ['only' => ['store']]);
+        Route::apiResource('roles', 'RoleController');
+        Route::apiResource('permissions', 'PermissionController');
+        Route::apiResource('activities', 'ActivityController', ['only' => ['index', 'show']]);
+    });
+
+    Route::apiResource('storage', 'StorageController', ['only' => ['show']]);
 });

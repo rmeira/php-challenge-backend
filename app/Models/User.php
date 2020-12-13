@@ -9,6 +9,9 @@ use Laravel\Passport\HasApiTokens;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @OA\Schema()
+ */
 class User extends Authenticatable
 {
     use HasApiTokens, Notifiable, LogsActivity, HasRoles, HasFactory;

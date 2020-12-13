@@ -69,7 +69,7 @@ class LoginController extends Controller
      *    				 @OA\Property(
      *                      property="email",
      *    					type="string",
-     *    					example="email@email.com",
+     *    					example="admin@phpchallenge.com.br",
      *    					description="Email"
      *    				),
      *    				 @OA\Property(

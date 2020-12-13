@@ -40,7 +40,7 @@ class ProfileActitivityController extends Controller
      *          response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/Activity"),
      *         )
      *      ),
      *      @OA\Response(

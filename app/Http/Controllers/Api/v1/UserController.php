@@ -89,7 +89,7 @@ class UserController extends Controller
      * @OA\Post(
      *      tags={"User"},
      *      operationId="users.create",
-     *      summary="User show",
+     *      summary="User create",
      *      security={{"token":{}}},
      *      path="/v1/users",
      *      @OA\RequestBody(
@@ -98,7 +98,7 @@ class UserController extends Controller
      *              @OA\Schema(ref="#/components/schemas/User"),
      *         )
      *     ),
-     *      @OA\Response(response="200", description="User success create",
+     *      @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
      *              @OA\Schema(ref="#/components/schemas/User"),
@@ -198,13 +198,7 @@ class UserController extends Controller
      *             type="integer",
      *         )
      *     ),
-     *     @OA\RequestBody(
-     *          @OA\MediaType(
-     *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
-     *         )
-     *      ),
-     *      @OA\Response(response="200", description="Updated user",
+     *      @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
      *              @OA\Schema(ref="#/components/schemas/User"),

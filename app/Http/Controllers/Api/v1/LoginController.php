@@ -117,7 +117,7 @@ class LoginController extends Controller
             return response()->json($this->createAccessToken());
         }
 
-        return response()->json(_('auth.failed'), 400);
+        return response()->json(__('auth.failed'), 400);
     }
 
     /**

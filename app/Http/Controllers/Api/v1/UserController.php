@@ -184,15 +184,13 @@ class UserController extends Controller
     /**
      * @OA\Put(
      *      tags={"User"},
-     *      operationId="user.update",
+     *      operationId="users.update",
      *      summary="User update",
-     *      description="Returns a array of objects of user",
      *      security={{"token":{}}},
-     *      path="/v1/user/{id}",
+     *      path="/v1/users/{id}",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of the user",
      *         required=true,
      *         @OA\Schema(
      *             type="integer",

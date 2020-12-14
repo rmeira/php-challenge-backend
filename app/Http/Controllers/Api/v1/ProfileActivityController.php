@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\v1;
 use App\Repositories\Contracts\ActivityRepositoryInterface;
 use Illuminate\Routing\Controller;
 
-class ProfileActitivityController extends Controller
+class ProfileActivityController extends Controller
 {
     /**
      * Activity Object

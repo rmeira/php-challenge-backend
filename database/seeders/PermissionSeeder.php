@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
@@ -75,7 +76,9 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         foreach ($this->permissions as $permission) {
-            Permission::firstOrCreate($permission);
+            $permission = Permission::firstOrCreate($permission);
+            $role = Role::first();
+            $role->givePermissionTo($permission);
         }
     }
 }

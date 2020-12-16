@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-interface UserRepositoryInterface
+interface ShiporderItemRepositoryInterface
 {
     /**
      * Return all resources

@@ -32,6 +32,31 @@ class AppServiceProvider extends ServiceProvider
             'App\Repositories\Contracts\PermissionRepositoryInterface',
             'App\Repositories\Eloquent\PermissionRepository'
         );
+
+        $this->app->bind(
+            'App\Repositories\Contracts\PeopleRepositoryInterface',
+            'App\Repositories\Eloquent\PeopleRepository'
+        );
+
+        $this->app->bind(
+            'App\Repositories\Contracts\PeoplePhoneRepositoryInterface',
+            'App\Repositories\Eloquent\PeoplePhoneRepository'
+        );
+
+        $this->app->bind(
+            'App\Repositories\Contracts\ShiporderRepositoryInterface',
+            'App\Repositories\Eloquent\ShiporderRepository'
+        );
+
+        $this->app->bind(
+            'App\Repositories\Contracts\ShiporderItemRepositoryInterface',
+            'App\Repositories\Eloquent\ShiporderItemRepository'
+        );
+
+        $this->app->bind(
+            'App\Repositories\Contracts\XmlProcessRepositoryInterface',
+            'App\Repositories\Eloquent\XmlProcessRepository'
+        );
     }
 
     /**

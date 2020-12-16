@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-interface UserRepositoryInterface
+interface PeopleRepositoryInterface
 {
     /**
      * Return all resources

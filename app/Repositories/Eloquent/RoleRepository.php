@@ -16,24 +16,6 @@ class RoleRepository implements RoleRepositoryInterface
     protected $role;
 
     /**
-     * Fields for query builder
-     *
-     * @var array
-     */
-    protected $fields = [
-        'name',
-        'guard_name',
-        'description'
-    ];
-
-    /**
-     * Relations
-     *
-     * @var array
-     */
-    protected $relation = ['permissions', 'activities', 'users'];
-
-    /**
      * Role repository constructor
      *
      * @param Role $role

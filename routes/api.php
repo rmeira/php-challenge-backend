@@ -22,6 +22,11 @@ Route::namespace('v1')->prefix('v1')->group(function () {
         Route::apiResource('roles', 'RoleController');
         Route::apiResource('permissions', 'PermissionController');
         Route::apiResource('activities', 'ActivityController', ['only' => ['index', 'show']]);
+        Route::apiResource('people', 'PeopleController');
+        Route::apiResource('people-phones', 'PeoplePhoneController');
+        Route::apiResource('shiporders', 'ShiporderController');
+        Route::apiResource('shiporder-items', 'ShiporderItemController');
+        Route::apiResource('xml-process', 'XmlProcessController');
     });
 
     Route::apiResource('storage', 'StorageController', ['only' => ['show']]);

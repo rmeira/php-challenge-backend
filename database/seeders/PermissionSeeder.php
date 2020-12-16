@@ -65,7 +65,87 @@ class PermissionSeeder extends Seeder
         [
             'name' => 'roles-delete',
             'guard_name' => 'api',
-        ]
+        ],
+        [
+            'name' => 'people-index',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'people-store',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'people-update',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'people-delete',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'shiporders-index',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'shiporders-store',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'shiporders-update',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'shiporders-delete',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'people-phones-index',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'people-phones-store',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'people-phones-update',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'people-phones-delete',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'shiporder-items-index',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'shiporder-items-store',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'shiporder-items-update',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'shiporder-items-delete',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'xml-process-index',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'xml-process-store',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'xml-process-update',
+            'guard_name' => 'api',
+        ],
+        [
+            'name' => 'xml-process-delete',
+            'guard_name' => 'api',
+        ],
     ];
 
     /**

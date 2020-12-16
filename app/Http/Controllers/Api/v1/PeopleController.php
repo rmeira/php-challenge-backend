@@ -2,48 +2,45 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserRequest;
-use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\PeopleRequest;
+use App\Repositories\Contracts\PeopleRepositoryInterface;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Artisan;
 
-class UserController extends Controller
+class PeopleController extends Controller
 {
     /**
      * Object model
      *
      * @var object
      */
-    protected $user;
+    protected $people;
 
     /**
      * Construction function
      *
-     * @param UserRepositoryInterface $user
+     * @param PeopleRepositoryInterface $people
      */
-    public function __construct(UserRepositoryInterface $user)
+    public function __construct(PeopleRepositoryInterface $people)
     {
-        $this->user = $user;
-        $this->middleware('permission:users-index', ['only' => ['show', 'index']]);
-        $this->middleware('permission:users-store', ['only' => ['store']]);
-        $this->middleware('permission:users-update', ['only' => ['update']]);
-        $this->middleware('permission:users-delete', ['only' => ['destroy']]);
+        $this->people = $people;
+        $this->middleware('permission:people-index', ['only' => ['show', 'index']]);
+        $this->middleware('permission:people-store', ['only' => ['store']]);
+        $this->middleware('permission:people-update', ['only' => ['update']]);
+        $this->middleware('permission:people-delete', ['only' => ['destroy']]);
     }
 
     /**
      * @OA\Get(
-     *      tags={"User"},
+     *      tags={"People"},
      *      @OA\RequestBody(
      *          @OA\MediaType(
      *              mediaType="application/json",
      *          )
      *      ),
-     *      operationId="users.index",
-     *      summary="User index",
+     *      operationId="people.index",
+     *      summary="People index",
      *      security={{"token":{}}},
-     *      path="/v1/users",
+     *      path="/v1/people",
      *      @OA\Parameter(
      *         in="query",
      *         name="include",
@@ -71,7 +68,7 @@ class UserController extends Controller
      *     @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/People"),
      *         )
      *     ),
      *     @OA\Response(
@@ -82,26 +79,26 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json($this->user->all());
+        return response()->json($this->people->all());
     }
 
     /**
      * @OA\Post(
-     *      tags={"User"},
-     *      operationId="users.create",
-     *      summary="User create",
+     *      tags={"People"},
+     *      operationId="people.create",
+     *      summary="People create",
      *      security={{"token":{}}},
-     *      path="/v1/users",
+     *      path="/v1/people",
      *      @OA\RequestBody(
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/People"),
      *         )
      *     ),
      *      @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/People"),
      *         )
      *     ),
      *     @OA\Response(
@@ -110,7 +107,7 @@ class UserController extends Controller
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="User does not have the right permission"
+     *         description="People does not have the right permission"
      *     ),
      *     @OA\Response(
      *         response=422,
@@ -118,27 +115,27 @@ class UserController extends Controller
      *     ),
      * ),
      */
-    public function store(UserRequest $request)
+    public function store(PeopleRequest $request)
     {
-        return response()->json($this->user->create($request->all()));
+        return response()->json($this->people->create($request->all()));
     }
 
     /**
      * @OA\Get(
-     *      tags={"User"},
+     *      tags={"People"},
      *      @OA\RequestBody(
      *          @OA\MediaType(
      *              mediaType="application/json",
      *          )
      *      ),
-     *      operationId="users.show",
-     *      summary="User show",
+     *      operationId="people.show",
+     *      summary="People show",
      *      security={{"token":{}}},
-     *      path="/v1/users/{id}",
+     *      path="/v1/people/{id}",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of the user",
+     *         description="ID of the people",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
@@ -159,7 +156,7 @@ class UserController extends Controller
      *     @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/People"),
      *         )
      *     ),
      *     @OA\Response(
@@ -168,22 +165,22 @@ class UserController extends Controller
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="User does not have the right permission"
+     *         description="People does not have the right permission"
      *     ),
      * ),
      */
     public function show($id)
     {
-        return response()->json($this->user->find($id));
+        return response()->json($this->people->find($id));
     }
 
     /**
      * @OA\Put(
-     *      tags={"User"},
-     *      operationId="users.update",
-     *      summary="User update",
+     *      tags={"People"},
+     *      operationId="people.update",
+     *      summary="People update",
      *      security={{"token":{}}},
-     *      path="/v1/users/{id}",
+     *      path="/v1/people/{id}",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -195,7 +192,7 @@ class UserController extends Controller
      *      @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/People"),
      *         )
      *     ),
      *     @OA\Response(
@@ -204,22 +201,22 @@ class UserController extends Controller
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="User does not have the right users"
+     *         description="People does not have the right people"
      *     )
      * ),
      */
-    public function update(UserRequest $request, $id)
+    public function update(PeopleRequest $request, $id)
     {
-        return response()->json($this->user->update($id, $request->all()));
+        return response()->json($this->people->update($id, $request->all()));
     }
 
     /**
      * @OA\Delete(
-     *      tags={"User"},
-     *      operationId="users.destroy",
-     *      summary="User destroy",
+     *      tags={"People"},
+     *      operationId="people.destroy",
+     *      summary="People destroy",
      *      security={{"token":{}}},
-     *      path="/v1/users/{id}",
+     *      path="/v1/people/{id}",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -251,12 +248,12 @@ class UserController extends Controller
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="User does not have the right permission"
+     *         description="People does not have the right permission"
      *     )
      * ),
      */
     public function destroy($id)
     {
-        return response()->json($this->user->delete($id));
+        return response()->json($this->people->delete($id));
     }
 }

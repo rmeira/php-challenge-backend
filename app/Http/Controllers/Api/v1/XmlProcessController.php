@@ -2,48 +2,45 @@
 
 namespace App\Http\Controllers\Api\v1;
 
-use App\Http\Requests\UserCreateRequest;
-use App\Http\Requests\UserRequest;
-use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\XmlProcessRequest;
+use App\Repositories\Contracts\XmlProcessRepositoryInterface;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Artisan;
 
-class UserController extends Controller
+class XmlProcessController extends Controller
 {
     /**
      * Object model
      *
      * @var object
      */
-    protected $user;
+    protected $xmlProcess;
 
     /**
      * Construction function
      *
-     * @param UserRepositoryInterface $user
+     * @param XmlProcessRepositoryInterface $xmlProcess
      */
-    public function __construct(UserRepositoryInterface $user)
+    public function __construct(XmlProcessRepositoryInterface $xmlProcess)
     {
-        $this->user = $user;
-        $this->middleware('permission:users-index', ['only' => ['show', 'index']]);
-        $this->middleware('permission:users-store', ['only' => ['store']]);
-        $this->middleware('permission:users-update', ['only' => ['update']]);
-        $this->middleware('permission:users-delete', ['only' => ['destroy']]);
+        $this->xmlProcess = $xmlProcess;
+        $this->middleware('permission:xml-process-index', ['only' => ['show', 'index']]);
+        $this->middleware('permission:xml-process-store', ['only' => ['store']]);
+        $this->middleware('permission:xml-process-update', ['only' => ['update']]);
+        $this->middleware('permission:xml-process-delete', ['only' => ['destroy']]);
     }
 
     /**
      * @OA\Get(
-     *      tags={"User"},
+     *      tags={"XmlProcess"},
      *      @OA\RequestBody(
      *          @OA\MediaType(
      *              mediaType="application/json",
      *          )
      *      ),
-     *      operationId="users.index",
-     *      summary="User index",
+     *      operationId="xmlProcess.index",
+     *      summary="XmlProcess index",
      *      security={{"token":{}}},
-     *      path="/v1/users",
+     *      path="/v1/xml-process",
      *      @OA\Parameter(
      *         in="query",
      *         name="include",
@@ -71,7 +68,7 @@ class UserController extends Controller
      *     @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/XmlProcess"),
      *         )
      *     ),
      *     @OA\Response(
@@ -82,26 +79,26 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json($this->user->all());
+        return response()->json($this->xmlProcess->all());
     }
 
     /**
      * @OA\Post(
-     *      tags={"User"},
-     *      operationId="users.create",
-     *      summary="User create",
+     *      tags={"XmlProcess"},
+     *      operationId="xmlProcess.create",
+     *      summary="XmlProcess create",
      *      security={{"token":{}}},
-     *      path="/v1/users",
+     *      path="/v1/xml-process",
      *      @OA\RequestBody(
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/XmlProcess"),
      *         )
      *     ),
      *      @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/XmlProcess"),
      *         )
      *     ),
      *     @OA\Response(
@@ -110,7 +107,7 @@ class UserController extends Controller
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="User does not have the right permission"
+     *         description="XmlProcess does not have the right permission"
      *     ),
      *     @OA\Response(
      *         response=422,
@@ -118,27 +115,26 @@ class UserController extends Controller
      *     ),
      * ),
      */
-    public function store(UserRequest $request)
+    public function store(XmlProcessRequest $request)
     {
-        return response()->json($this->user->create($request->all()));
+        return response()->json($this->xmlProcess->create($request->all()));
     }
 
     /**
      * @OA\Get(
-     *      tags={"User"},
+     *      tags={"XmlProcess"},
      *      @OA\RequestBody(
      *          @OA\MediaType(
      *              mediaType="application/json",
      *          )
      *      ),
-     *      operationId="users.show",
-     *      summary="User show",
+     *      operationId="xmlProcess.show",
+     *      summary="XmlProcess show",
      *      security={{"token":{}}},
-     *      path="/v1/users/{id}",
+     *      path="/v1/xml-process/{id}",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
-     *         description="ID of the user",
      *         required=true,
      *         @OA\Schema(
      *             type="integer"
@@ -159,7 +155,7 @@ class UserController extends Controller
      *     @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/XmlProcess"),
      *         )
      *     ),
      *     @OA\Response(
@@ -168,22 +164,22 @@ class UserController extends Controller
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="User does not have the right permission"
+     *         description="XmlProcess does not have the right permission"
      *     ),
      * ),
      */
     public function show($id)
     {
-        return response()->json($this->user->find($id));
+        return response()->json($this->xmlProcess->find($id));
     }
 
     /**
      * @OA\Put(
-     *      tags={"User"},
-     *      operationId="users.update",
-     *      summary="User update",
+     *      tags={"XmlProcess"},
+     *      operationId="xmlProcess.update",
+     *      summary="XmlProcess update",
      *      security={{"token":{}}},
-     *      path="/v1/users/{id}",
+     *      path="/v1/xml-process/{id}",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -195,7 +191,7 @@ class UserController extends Controller
      *      @OA\Response(response="200",
      *          @OA\MediaType(
      *              mediaType="application/json",
-     *              @OA\Schema(ref="#/components/schemas/User"),
+     *              @OA\Schema(ref="#/components/schemas/XmlProcess"),
      *         )
      *     ),
      *     @OA\Response(
@@ -204,22 +200,22 @@ class UserController extends Controller
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="User does not have the right users"
+     *         description="XmlProcess does not have the right xmlProcess"
      *     )
      * ),
      */
-    public function update(UserRequest $request, $id)
+    public function update(XmlProcessRequest $request, $id)
     {
-        return response()->json($this->user->update($id, $request->all()));
+        return response()->json($this->xmlProcess->update($id, $request->all()));
     }
 
     /**
      * @OA\Delete(
-     *      tags={"User"},
-     *      operationId="users.destroy",
-     *      summary="User destroy",
+     *      tags={"XmlProcess"},
+     *      operationId="xmlProcess.destroy",
+     *      summary="XmlProcess destroy",
      *      security={{"token":{}}},
-     *      path="/v1/users/{id}",
+     *      path="/v1/xml-process/{id}",
      *      @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -251,12 +247,12 @@ class UserController extends Controller
      *     ),
      *     @OA\Response(
      *         response=403,
-     *         description="User does not have the right permission"
+     *         description="XmlProcess does not have the right permission"
      *     )
      * ),
      */
     public function destroy($id)
     {
-        return response()->json($this->user->delete($id));
+        return response()->json($this->xmlProcess->delete($id));
     }
 }

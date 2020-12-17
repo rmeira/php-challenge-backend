@@ -15,10 +15,7 @@ class XmlProcessRequest extends FormRequest
     {
         return [
             'file' => 'required',
-            'table' => 'required|in:people,shiporders',
-            'processed' => 'bool',
-            'errors' => 'bool',
-            'details' => 'required',
+            'table' => 'required|in:people,shiporders'
         ];
     }
 

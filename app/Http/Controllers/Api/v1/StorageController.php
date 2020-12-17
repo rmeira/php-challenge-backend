@@ -90,6 +90,6 @@ class StorageController extends Controller
      */
     public function show($filename)
     {
-        return Storage::download(config('app.env') . '/' . $filename);
+        return storage_download($filename);
     }
 }

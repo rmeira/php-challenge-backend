@@ -2,9 +2,12 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\Jobs\XmlProcessJob;
+use App\Models\People;
 use App\Repositories\Contracts\XmlProcessRepositoryInterface;
 use Spatie\QueryBuilder\QueryBuilder;
 use App\Models\XmlProcess;
+use SimpleXMLElement;
 
 class XmlProcessRepository implements XmlProcessRepositoryInterface
 {
@@ -59,11 +62,46 @@ class XmlProcessRepository implements XmlProcessRepositoryInterface
      */
     public function create(array $data)
     {
-        $xmlProcess = new $this->xmlProcess;
-        $xmlProcess->fill($data);
-        $xmlProcess->save();
+        try {
+            $xml = simplexml_load_string(storage_get($data['file']));
 
-        return $xmlProcess;
+            switch ($data['table']) {
+                case 'people':
+                    return $this->processXmlPerson($xml);
+                    break;
+                case 'shiporders':
+                    return $this->processXmlShiporder($xml);
+                    break;
+            }
+        } catch (\Throwable $th) {
+            return ($th);
+        }
+
+        // $xmlProcess = new $this->xmlProcess;
+        // $xmlProcess->fill($data);
+        // $xmlProcess->save();
+
+
+
+        // return $xmlProcess;
+    }
+
+    private function processXmlPerson($xml)
+    {
+        foreach ($xml->person as $value) {
+            return ($value->personname);
+            $person = People::create([
+                'person_id' => $value->personid,
+                'name' => $value->personname,
+            ]);
+        }
+
+        return $person;
+    }
+
+    private function processXmlShiporder($xml)
+    {
+        return ($xml);
     }
 
     /**

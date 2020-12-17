@@ -15,6 +15,13 @@ class XmlProcess extends Model
     use LogsActivity, HasFactory;
 
     /**
+     * Table name
+     *
+     * @var string
+     */
+    protected $table = 'xml_process';
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -22,10 +29,6 @@ class XmlProcess extends Model
     protected $fillable = [
         'file',
         'table',
-        'processed',
-        'errors',
-        'processed_at',
-        'details',
     ];
 
     /**

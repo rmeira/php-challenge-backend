@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\XmlProcess;
+use App\Observers\XmlProcessObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -66,6 +68,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        XmlProcess::observe(XmlProcessObserver::class);
     }
 }
